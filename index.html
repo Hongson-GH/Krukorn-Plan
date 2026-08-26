@@ -1,0 +1,255 @@
+<!-- Chosen Palette: Indigo & Warm Gold (Music & Harmony Theme) -->
+<!-- Application Structure Plan: Single-page digital lesson plan dashboard translating choral singing pedagogy into an interactive teacher dashboard, featuring embedded Chrome Music Lab web app iframe, MathJax harmonic equations, and a 5-step active workshop flow tailored for M.6 students with a fun, engaging, and low-friction approach. -->
+<!-- Visualization & Content Choices: Interactive Chrome Music Lab iframe embedded directly for live pitch matching; MathJax rendered TeX equations for harmonic intervals and voice balance ratios; HTML/Tailwind cards and badges for structured step-by-step active learning. NO SVG or Mermaid JS used. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนการจัดการเรียนรู้ดิจิทัล: ขับร้องประสานเสียง (Choral Singing & Harmony)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #f3f4f6; }
+        h1, h2, h3, h4, h5, h6, .font-prompt { font-family: 'Prompt', sans-serif; }
+        .math-display { overflow-x: auto; overflow-y: hidden; }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-music text-2xl text-yellow-400"></i>
+                <div>
+                    <span class="font-bold text-lg font-prompt block leading-tight">Digital Lesson Plan</span>
+                    <span class="text-xs text-indigo-200">Active Learning & Technology Integration</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-5xl p-4 md:p-8 my-6 bg-white shadow-xl rounded-xl border border-gray-200">
+        
+        <!-- Header: School & Teacher Info -->
+        <header class="border-b-4 border-indigo-600 pb-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                <div class="flex-1">
+                    <h5 class="text-indigo-600 font-bold uppercase tracking-wide text-sm mb-1">กลุ่มสาระการเรียนรู้ศิลปะ (สาระดนตรี)</h5>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 font-prompt">โรงเรียนห้องสอนศึกษาในพระอุปถัมภ์ฯ</h1>
+                    <div class="mt-4 space-y-1">
+                        <h2 class="text-2xl font-bold text-gray-800">เรื่อง ขับร้องประสานเสียง</h2>
+                        <h3 class="text-lg text-gray-500 font-light">(Fundamentals of Choral Singing & Harmonic Artistry)</h3>
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-100 min-w-[280px] shadow-sm">
+                    <div class="flex items-center gap-3 mb-2 border-b border-indigo-200 pb-2">
+                        <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500">ครูผู้สอน</p>
+                            <p class="font-bold text-indigo-900">ครูทินกร สถิตเจริญกุล</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p class="flex justify-between"><span><i class="fa-solid fa-book mr-2 text-indigo-400"></i>วิชา:</span> <span class="font-bold">ดนตรีสากล (ศ33101)</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-layer-group mr-2 text-indigo-400"></i>ชั้น:</span> <span class="font-bold">มัธยมศึกษาปีที่ 6</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-calendar-alt mr-2 text-indigo-400"></i>ภาคเรียน:</span> <span class="font-bold">ภาคเรียนที่ 1</span></p>
+                        <p class="flex justify-between"><span><i class="fa-regular fa-clock mr-2 text-indigo-400"></i>เวลา:</span> <span class="font-bold">3 คาบ (150 นาที)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Innovation Link & Download Button -->
+            <div class="mt-6 p-4 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-lg text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                        <i class="fa-solid fa-compact-disc text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg font-prompt">สื่อการสอนนวัตกรรม (Web Application)</h3>
+                        <p class="text-blue-100 text-sm">Chrome Music Lab & Choral Pitch Harmony Studio</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <!-- Download Button -->
+                    <a href="https://drive.google.com/drive/folders/1t7ylbXk6bFDxvBFogBGms_e0D8c3Qh5G?usp=sharing" target="_blank" class="bg-white/20 border border-white/50 text-white px-5 py-2 rounded-full font-bold hover:bg-white/30 transition shadow-md flex items-center justify-center text-sm backdrop-blur-sm whitespace-nowrap">
+                        <i class="fa-brands fa-google-drive mr-2"></i> ดาวน์โหลดแผนฯ
+                    </a>
+                    
+                    <!-- Open App Button -->
+                    <a href="https://musiclab.chromeexperiments.com/Shared-Piano/" target="_blank" class="bg-white text-blue-700 px-6 py-2 rounded-full font-bold hover:bg-blue-50 transition shadow-md transform hover:scale-105 flex items-center justify-center whitespace-nowrap">
+                        <i class="fa-solid fa-play mr-2"></i> เปิดใช้งาน App
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Info & Standards -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Learning Outcomes -->
+                <div class="bg-orange-50 p-5 rounded-lg border-l-4 border-orange-500 shadow-sm">
+                    <h3 class="font-bold text-lg text-orange-800 mb-3 font-prompt">
+                        <i class="fa-solid fa-scroll mr-2"></i> ผลการเรียนรู้
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                        "อธิบายและวิเคราะห์ลักษณะของแนวเสียงร้อง (Soprano, Alto, Tenor, Bass) ฝึกทักษะการฟังและการปรับระดับเสียงร้อง และ<b>ร่วมขับร้องประสานเสียง 2-4 แนวกับผู้อื่นอย่างถูกต้อง มีจังหวะที่แม่นยำ และถ่ายทอดอารมณ์เพลงได้อย่างสนุกสนานและเป็นธรรมชาติ</b>"
+                    </p>
+                </div>
+
+                <!-- Concept & Equations -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 font-prompt flex items-center">
+                        <i class="fa-solid fa-music text-purple-600 mr-2"></i> โครงสร้างการประสานเสียง
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-3 rounded text-center border border-gray-200">
+                            <span class="text-xs text-gray-500 block mb-1">สูตรคอร์ดขั้นคู่ประสาน (Harmonic Triad)</span>
+                            <div class="math-display">$$ \text{Chord} = \text{Root} + \text{Major 3rd} + \text{Perfect 5th} $$</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded text-center border border-gray-200">
+                            <span class="text-xs text-gray-500 block mb-1">อัตราส่วนความสมดุลวงขับร้อง (SATB Ratio)</span>
+                            <div class="math-display text-xs">
+                                $$ \text{Harmony Balance} = \frac{\text{Melody (S/T)}}{\text{Support (A/B)}} \approx 1.0 $$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objectives -->
+                <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                    <h3 class="font-bold text-lg text-blue-900 mb-3 font-prompt">
+                        <i class="fa-solid fa-bullseye mr-2"></i> จุดประสงค์ (KPA)
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex gap-2">
+                            <span class="badge bg-blue-200 text-blue-800 px-2 rounded font-bold">K</span>
+                            <span>นักเรียนระบุจำแนกประเภทช่วงเสียง (SATB) และหลักการร้องประสานเสียงเบื้องต้นได้</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="badge bg-green-200 text-green-800 px-2 rounded font-bold">P</span>
+                            <span>นักเรียนปฏิบัติการขับร้องประสานเสียงร่วมกับกลุ่มได้ตรงคีย์และแม่นยำตามจังหวะ</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="badge bg-red-200 text-red-800 px-2 rounded font-bold">A</span>
+                            <span>นักเรียนมีความสนุกสนาน มั่นใจ และมีเจตคติที่ดีในการร่วมมือกับเพื่อนผ่านเสียงเพลง</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Learning Activities Process -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-bold text-xl text-indigo-700 font-prompt">
+                            <i class="fa-solid fa-chalkboard-user mr-2"></i> กิจกรรมการเรียนรู้ (Workshop & Harmony Jam)
+                        </h3>
+                    </div>
+
+                    <div class="p-6 space-y-6">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative pl-8 border-l-2 border-indigo-200">
+                            <div class="absolute -left-[17px] top-0 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นเตรียมพร้อมและละลายพฤติกรรม (Vocal Warm-up & Fun Pitching) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">20 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <p>• <b>Ice-breaking:</b> ครูชวนนักเรียนทำกิจกรรม "Vocal Siren & Sound Match" วอร์มเสียงด้วยการทำเสียงหวูดรถไฟ เสียงไซเรน และเลียนแบบเสียงตัวการ์ตูนเพื่อสร้างบรรยากาศเป็นกันเองและผ่อนคลาย</p>
+                                
+                                <div class="mt-3 mb-3">
+                                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-3">
+                                        <p class="text-sm font-bold text-indigo-800 mb-2"><i class="fa-solid fa-headphones mr-2"></i>สื่อประกอบ: Chrome Music Lab (Shared Piano & Song Maker)</p>
+                                        <!-- Interactive Music Web App Frame -->
+                                        <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-sm bg-black">
+                                            <iframe 
+                                                src="https://musiclab.chromeexperiments.com/Shared-Piano/" 
+                                                class="absolute top-0 left-0 w-full h-full border-0" 
+                                                allow="fullscreen; microphone; autoplay"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>• <b>Harmonic Tuning:</b> ครูดีดโน้ตเปียโนดิจิทัลบนแอปให้นักเรียนเปล่งเสียง "โอ" และ "อา" เพื่อปรับระดับ Pitch เสียงให้ตรงกันอย่างพร้อมเพรียง</p>
+                                <p>• <b>Onboarding:</b> นักเรียนเชื่อมต่อเว็บแอปเพื่อทดลองฟังคอร์ดประสานเสียง 3 โน้ตพร้อมกัน</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative pl-8 border-l-2 border-indigo-200">
+                            <div class="absolute -left-[17px] top-0 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นค้นหาแนวเสียงและจัดทีม (Voice Classification & Pitch Matching) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">30 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded font-bold mb-1">[Harmony Discovery] กิจกรรม: Pitch Matcher Game</span>
+                                <p>• <b>Voice Testing:</b> ครูทดสอบช่วงเสียงนักเรียนรายบุคคลอย่างง่ายๆ (ร้องโน้ตต่ำถึงสูง) แล้วแบ่งกลุ่มออกเป็น 3-4 กลุ่มตามแนวเสียง: Soprano (เสียงสูงหญิง), Alto (เสียงต่ำหญิง), Tenor (เสียงสูงชาย), Bass (เสียงต่ำชาย)</p>
+                                <p>• <b>Choral Mission:</b> แต่ละกลุ่มรับภารกิจประจำแนวเสียง โดยได้รับโจทย์ให้จำทำนองแนวประสานของตนเองผ่านการฟังตัวอย่างจากแอป Chrome Music Lab</p>
+                                <p>• <b>Interactive Game:</b> เล่นเกมสุ่มทายคอร์ดเสียงประสานบนเว็บแอป ใครตอบถูกกลุ่มนั้นได้รับแต้มสะสมความพร้อม</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative pl-8 border-l-2 border-indigo-200">
+                            <div class="absolute -left-[17px] top-0 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นฝึกซ้อมประสานเสียงเป็นทีม (Choral Harmony Workshop) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">50 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded font-bold mb-1">[Group Ensemble Practice]</span>
+                                <p>• <b>Sectional Practice:</b> แยกซ้อมตามกลุ่มแนวเสียง ครูเดินให้คำแนะนำสไตล์ Coaching เน้นสร้างความมั่นใจ คอยช่วยปรับจังหวะและแก้จุดที่เสียงเพี้ยน</p>
+                                <p>• <b>Tutti Combined:</b> รวมวงฝึกร้องพร้อมกัน 2-3 แนวเสียง โดยเลือกใช้บทเพลงไทยสากล/ป๊อบฮิตที่นักเรียนคุ้นเคยและชื่นชอบ เพื่อเพิ่มความตื่นเต้นและสนุกสนาน</p>
+                                <p>• <b>Peer Coaching:</b> สมาชิกในกลุ่มช่วยกันฟังเสียงเพื่อนข้างๆ ("Listen & Blend Rule") เน้นผสานเสียงให้กลมกลืน ไม่ร้องข่มกัน</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative pl-8 border-l-2 border-indigo-200">
+                            <div class="absolute -left-[17px] top-0 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นปล่อยของและมินิคอนเสิร์ต (Mini Harmony Showcase) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">35 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded font-bold mb-1">[Performance & Jam Session] กิจกรรม: Classroom Choral Festival</span>
+                                <p>• <b>Showcase:</b> แต่ละวงนำเสนอผลงานการขับร้องประสานเสียง 1 ท่อนฮิตต่อหน้าเพื่อนๆ ในห้องเรียน</p>
+                                <p>• <b>Live Interaction:</b> เพื่อนๆ กลุ่มอื่นรับบทเป็นผู้ชม ให้สติกเกอร์หัวใจ ชูการ์ดชมเชย และส่งเสียงเชียร์เพื่อสร้างบรรยากาศคอนเสิร์ตจริง</p>
+                                <p>• <b>Teacher Coaching:</b> ครูบันทึกคลิปวิดีโอสั้นพร้อมให้ข้อเสนอแนะเชิงบวกทันทีทีละวง</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="relative pl-8 border-l-2 border-indigo-200">
+                            <div class="absolute -left-[17px] top-0 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">5</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นสะท้อนคิดและมอบรางวัล (Reflection & Music Award) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">15 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded font-bold mb-1">[Positive Reflection]</span>
+                                <p>• <b>Reflection:</b> นักเรียนร่วมกันถอดบทเรียน "เสน่ห์ของการฟังกันและกันในการร้องประสานเสียง" และความรู้สึกของการทำงานเป็นทีม</p>
+                                <p>• <b>Awards & Certificate:</b> มอบรางวัลสุดฟิน เช่น "รางวัลขวัญใจมหาชน (Popular Harmony)", "รางวัลเสียงกลมกลืนยอดเยี่ยม (Best Blend Ensemble)" และ "รางวัลพลังงานยอดเยี่ยม (Best Energy)"</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
